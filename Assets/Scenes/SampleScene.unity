@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 99208164}
   - component: {fileID: 99208163}
   m_Layer: 0
-  m_Name: Sphere (1)
+  m_Name: Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 630517999}
   - component: {fileID: 630517998}
   m_Layer: 0
-  m_Name: Sphere (2)
+  m_Name: Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 1140284927}
   - component: {fileID: 1140284926}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,6 +809,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea386eb6d6cd747b9a6742500f3b80dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  animationDuration: 1
+  targetNoneMaterial: {fileID: 2100000, guid: 050d5b01a018d40bd9788962c3f7fb64, type: 2}
+  redLight: {fileID: 1140284925}
+  yellowLight: {fileID: 99208162}
+  greenLight: {fileID: 630517997}
 --- !u!1 &1507060043
 GameObject:
   m_ObjectHideFlags: 0
