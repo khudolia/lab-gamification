@@ -18,6 +18,9 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             dragRectTransform,
             eventData.position,
@@ -28,6 +31,9 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
     public void OnDrag(PointerEventData eventData)
     {
         if (dragRectTransform == null || canvas == null)
+            return;
+        
+        if (eventData.button == PointerEventData.InputButton.Right)
             return;
 
         Vector2 localPointerPosition;

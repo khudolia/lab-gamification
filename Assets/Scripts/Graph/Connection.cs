@@ -3,8 +3,8 @@
 [RequireComponent(typeof(LineRenderer)), ExecuteInEditMode]
 public class Connection : MonoBehaviour {
 	const int minResolution = 2;
-	const int maxResolution = 20;
-	const int avgResolution = 20;
+	const int maxResolution = 40;
+	const int avgResolution = 40;
 
 	//TODO: rename to "targets", plural
 	public RectTransform[] target = new RectTransform[2];
@@ -13,7 +13,7 @@ public class Connection : MonoBehaviour {
 		new ConnectionPoint()
 	};
 
-	[SerializeField, Range(minResolution, maxResolution)] int resolution = avgResolution;
+	int resolution = 40;
 
 	[SerializeField] LineRenderer _line;
 	public LineRenderer line {

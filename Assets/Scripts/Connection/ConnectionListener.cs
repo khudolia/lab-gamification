@@ -4,12 +4,13 @@ using UnityEngine.EventSystems;
 
 public class ConnectionListener : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    
+    private ConnectionCreator _connectionCreator;
     private bool isRightClicking = false;
 
     private void Start()
     {
-        var connection = GameObject.Find("connectionManagerer");
+        var connection = GameObject.Find("ConnectionManager");
+        _connectionCreator = connection.GetComponent<ConnectionCreator>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -17,7 +18,8 @@ public class ConnectionListener : MonoBehaviour, IPointerDownHandler, IPointerUp
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             isRightClicking = true;
-            Debug.Log("Right click started on: " + gameObject.name);
+            
+            _connectionCreator.StartConnecting(gameObject);
         }
     }
 
@@ -26,7 +28,9 @@ public class ConnectionListener : MonoBehaviour, IPointerDownHandler, IPointerUp
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             isRightClicking = false;
-            Debug.Log("Right click stopped on: " + gameObject.name);
+            
+            _connectionCreator.StopConnecting();
+
         }
     }
 }

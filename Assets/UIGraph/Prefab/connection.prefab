@@ -235,5 +235,4 @@ MonoBehaviour:
     direction: 0
     position: 0
     weight: 1
-  resolution: 20
   _line: {fileID: 12022754}
