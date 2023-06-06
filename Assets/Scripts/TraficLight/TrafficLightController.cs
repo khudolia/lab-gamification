@@ -7,6 +7,8 @@ public enum State
     All,
     Red,
     Yellow,
+    RedAndYellow,
+    GreenAndYellow,
     Green
 }
 
@@ -60,6 +62,14 @@ public class TrafficLightController : MonoBehaviour
         {
             case State.Red:
                 ChangeLight(redLight, _targetRedMaterial, _redCoroutine);
+                break;
+            case State.RedAndYellow:
+                ChangeLight(yellowLight, _targetYellowMaterial, _yellowCoroutine);
+                ChangeLight(redLight, _targetRedMaterial, _redCoroutine);
+                break;
+            case State.GreenAndYellow:
+                ChangeLight(yellowLight, _targetYellowMaterial, _yellowCoroutine);
+                ChangeLight(greenLight, _targetGreenMaterial, _greenCoroutine);
                 break;
             case State.Yellow:
                 ChangeLight(yellowLight, _targetYellowMaterial, _yellowCoroutine);

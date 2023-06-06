@@ -41,6 +41,12 @@ public class ConnectionCreator : MonoBehaviour
 
     public void SetTargetConnection(GameObject targetObject)
     {
+        if (_initialObject.name == targetObject.name)
+        {
+            NoConnectionFound();
+            return;
+        }
+        
         _targetObject = targetObject;
 
         cursorPointer.SetActive(false);
