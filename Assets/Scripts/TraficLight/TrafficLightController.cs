@@ -18,9 +18,10 @@ public class TrafficLightController : MonoBehaviour
     public float animationDuration = 1f;
     public Material targetNoneMaterial;
 
-    [Header("Lights")] public GameObject redLight;
-    public GameObject yellowLight;
-    public GameObject greenLight;
+    [Header("Lights")] 
+    public GameObject[] redLight;
+    public GameObject[] yellowLight;
+    public GameObject[] greenLight;
 
     private Color _targetRedMaterial = Color.black;
     private Color _targetYellowMaterial = Color.black;
@@ -37,12 +38,12 @@ public class TrafficLightController : MonoBehaviour
 
     void Start()
     {
-        _targetRedMaterial = redLight.GetComponent<Renderer>().material.color;
-        _targetYellowMaterial = yellowLight.GetComponent<Renderer>().material.color;
-        _targetGreenMaterial = greenLight.GetComponent<Renderer>().material.color;
+        _targetRedMaterial = redLight[0].GetComponent<Renderer>().material.color;
+        _targetYellowMaterial = yellowLight[0].GetComponent<Renderer>().material.color;
+        _targetGreenMaterial = greenLight[0].GetComponent<Renderer>().material.color;
         _targetNoneColor = targetNoneMaterial.color;
 
-        _targetIntensity = MaterialHelper.GetMaterialEmissionIntensity(redLight.GetComponent<Renderer>().material);
+        _targetIntensity = MaterialHelper.GetMaterialEmissionIntensity(redLight[0].GetComponent<Renderer>().material);
     }
 
     private void Update()
@@ -131,11 +132,14 @@ public class TrafficLightController : MonoBehaviour
         }
     }
 
-    private void ChangeLight(GameObject targetObject, Color targetColor, Coroutine coroutine)
+    private void ChangeLight(GameObject[] targetObjects, Color targetColor, Coroutine coroutine)
     {
         if (coroutine != null)
             StopCoroutine(coroutine);
 
-        coroutine = StartCoroutine(ChangeColor(targetObject, targetColor));
+        for (var i = 0; i < targetObjects.Length; i++)
+        {
+            coroutine = StartCoroutine(ChangeColor(targetObjects[i], targetColor));
+        }
     }
 }

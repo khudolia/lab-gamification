@@ -9,4 +9,8 @@ public class LevelsLoader : MonoBehaviour
     {
         SceneManager.LoadScene("TrafficLightScene", LoadSceneMode.Single);
     }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+    }
 }
