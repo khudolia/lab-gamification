@@ -57,6 +57,13 @@ public class ConnectionManager : MonoBehaviour {
 		return found;
 	}
 
+	public static List<Connection> GetConnections() {
+		List<Connection> found = new List<Connection>();
+		if (!instance) return found;
+
+		return instance.connections;
+	}
+
 	public static void AddConnection(Connection c) {
 		if (c == null || !instance) return;
 

@@ -44,6 +44,8 @@ public class TrafficLightController : MonoBehaviour
         _targetNoneColor = targetNoneMaterial.color;
 
         _targetIntensity = MaterialHelper.GetMaterialEmissionIntensity(redLight[0].GetComponent<Renderer>().material);
+        
+        TurnOnTrafficLight(State.None);
     }
 
     private void Update()
@@ -57,7 +59,7 @@ public class TrafficLightController : MonoBehaviour
         }
     }
 
-    private void TurnOnTrafficLight(State state)
+    public void TurnOnTrafficLight(State state)
     {
         switch (state)
         {

@@ -41,12 +41,21 @@ public class ConnectionCreator : MonoBehaviour
 
     public void SetTargetConnection(GameObject targetObject)
     {
-        if (_initialObject.name == targetObject.name)
+        if (_initialObject.name == targetObject.name || IsConnectionAlreadyExists(targetObject))
         {
             NoConnectionFound();
             return;
         }
         
+        if (_initialObject.name is "Start" or "End")
+        {
+            if (IsHasConnection())
+            {
+                NoConnectionFound();
+                return;
+            }
+        }
+
         _targetObject = targetObject;
 
         cursorPointer.SetActive(false);
@@ -63,7 +72,7 @@ public class ConnectionCreator : MonoBehaviour
 
         var connection1 = connection.points[0];
         var connection2 = connection.points[1];
-        connection1.direction = ObjectDirectionCalculation.CalculatePosition(secondPoint,firstPoint);
+        connection1.direction = ObjectDirectionCalculation.CalculatePosition(secondPoint, firstPoint);
         connection2.direction = ObjectDirectionCalculation.CalculatePosition(firstPoint, secondPoint);
 
         connection1.weight = .1f;
@@ -77,5 +86,18 @@ public class ConnectionCreator : MonoBehaviour
         ConnectionManager.RemoveConnection(ConnectionManager.FindConnection(
             _initialObject.GetComponent<RectTransform>(),
             target.GetComponent<RectTransform>()));
+    }
+
+    private bool IsConnectionAlreadyExists(GameObject target)
+    {
+        return ConnectionManager.FindConnection(
+            _initialObject.GetComponent<RectTransform>(),
+            target.GetComponent<RectTransform>()) != null;
+    }
+
+    private bool IsHasConnection()
+    {
+        return ConnectionManager.FindConnections(
+            _initialObject.GetComponent<RectTransform>()).Count > 0;
     }
 }

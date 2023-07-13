@@ -13,6 +13,8 @@ public class Connection : MonoBehaviour {
 		new ConnectionPoint()
 	};
 
+	public int time = System.DateTime.Now.Millisecond;
+
 	int resolution = 40;
 
 	[SerializeField] LineRenderer _line;

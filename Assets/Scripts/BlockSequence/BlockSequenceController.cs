@@ -6,6 +6,7 @@ using UnityEngine;
 public class BlockSequenceController : MonoBehaviour
 {
     public TrafficLightController trafficLightController;
+    public ProgrammingNodeCollector programmingNodeCollector;
 
     public GameObject startButton;
     public GameObject restartButton;
@@ -59,8 +60,8 @@ public class BlockSequenceController : MonoBehaviour
     {
         GetComponent<SmoothPlaneDistance>().HidePlane();
 
-        isRunning = true;
-        StartCoroutine(ControlTrafficLight());
+        //StartCoroutine(ControlTrafficLight());
+        programmingNodeCollector.CreateSequence();
         
         restartButton.SetActive(true);
         startButton.SetActive(false);
@@ -70,8 +71,9 @@ public class BlockSequenceController : MonoBehaviour
     {
         GetComponent<SmoothPlaneDistance>().ShowPlane();
 
-        isRunning = false;
-        StopCoroutine(ControlTrafficLight());
+      //  StopCoroutine(ControlTrafficLight());
+        programmingNodeCollector.StopSequence();
+
         
         restartButton.SetActive(false);
         startButton.SetActive(true);
