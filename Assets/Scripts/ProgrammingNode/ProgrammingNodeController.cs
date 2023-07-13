@@ -43,6 +43,18 @@ public class ProgrammingNodeController : MonoBehaviour
             case "Yellow":
                 model.state = State.Yellow;
                 break;
+            case "None":
+                model.state = State.None;
+                break;
+            case "All":
+                model.state = State.All;
+                break;
+            case "RedAndYellow":
+                model.state = State.RedAndYellow;
+                break;
+            case "GreenAndYellow":
+                model.state = State.GreenAndYellow;
+                break;
         }
     }
     
