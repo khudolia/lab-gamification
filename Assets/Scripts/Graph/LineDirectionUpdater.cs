@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class LineDirectionUpdater : MonoBehaviour
 {
+    public bool isEnable = true;
+    
     private void Update()
     {
+        if (!isEnable) return;
+        
         List<Connection> connections = ConnectionManager.FindConnections(GetComponent<RectTransform>());
 
         if (connections == null) return;

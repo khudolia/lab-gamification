@@ -20,7 +20,7 @@ public class ConnectionCreator : MonoBehaviour
 
     public void StartConnecting(GameObject initialObject)
     {
-        _initialObject = initialObject;
+        SetStartConnection(initialObject);
         cursorPointer.SetActive(true);
 
         CreateConnection(cursorPointer);
@@ -39,6 +39,11 @@ public class ConnectionCreator : MonoBehaviour
         cursorPointer.SetActive(false);
     }
 
+    public void SetStartConnection(GameObject startObject)
+    {
+        _initialObject = startObject;
+    }
+
     public void SetTargetConnection(GameObject targetObject)
     {
         if (_initialObject.name == targetObject.name || IsConnectionAlreadyExists(targetObject))
@@ -46,14 +51,13 @@ public class ConnectionCreator : MonoBehaviour
             NoConnectionFound();
             return;
         }
-        
-        if (_initialObject.name is "Start" or "End")
+
+        bool initialConnectionsBad = IsHasConnections(_initialObject, _initialObject.name is "Start" or "End" ? 0 : 2);
+        bool targetConnectionsBad = IsHasConnections(targetObject, targetObject.name is "Start" or "End" ? 0 : 2);
+        if (initialConnectionsBad || targetConnectionsBad)
         {
-            if (IsHasConnection())
-            {
-                NoConnectionFound();
-                return;
-            }
+            NoConnectionFound();
+            return;
         }
 
         _targetObject = targetObject;
@@ -95,9 +99,9 @@ public class ConnectionCreator : MonoBehaviour
             target.GetComponent<RectTransform>()) != null;
     }
 
-    private bool IsHasConnection()
+    private bool IsHasConnections(GameObject gameObject, int numberOfConnections)
     {
         return ConnectionManager.FindConnections(
-            _initialObject.GetComponent<RectTransform>()).Count > 0;
+            gameObject.GetComponent<RectTransform>()).Count > numberOfConnections;
     }
 }

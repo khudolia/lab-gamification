@@ -9,6 +9,8 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
 
     private Vector2 pointerOffset;
 
+    public bool isDragging = false;
+    
     private void Start()
     {
         dragRectTransform = GetComponent<RectTransform>();
@@ -36,6 +38,8 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
 
+        isDragging = true;
+        
         Vector2 localPointerPosition;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvasRectTransform,
@@ -51,6 +55,8 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
     public void OnPointerUp(PointerEventData eventData)
     {
         // Perform any necessary cleanup or additional logic when the dragging ends
+
+        isDragging = false;
     }
 
     private Vector2 ClampToScreen(Vector2 position)

@@ -78,7 +78,7 @@ public class ConnectionManager : MonoBehaviour {
 		if (c != null && _instance != null)
 		{
 			_instance.connections.Remove(c);
-			DestroyImmediate(c.gameObject);
+			Destroy(c.gameObject);
 		}
 	}
 
