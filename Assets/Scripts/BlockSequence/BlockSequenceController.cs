@@ -28,39 +28,11 @@ public class BlockSequenceController : MonoBehaviour
         {
         }
     }
-    
-    private IEnumerator ControlTrafficLight()
-    {
-        while (isRunning)
-        {
-            trafficLightController.currentState = State.Red;
-            yield return new WaitForSeconds(1.2f);
-            trafficLightController.currentState = State.RedAndYellow;
-            yield return new WaitForSeconds(1.2f);
-            trafficLightController.currentState = State.Green;
-            yield return new WaitForSeconds(2);
-            
-            
-            trafficLightController.currentState = State.GreenAndYellow;
-            yield return new WaitForSeconds(.7f);
-            trafficLightController.currentState = State.Green;
-            yield return new WaitForSeconds(.7f);
-            trafficLightController.currentState = State.GreenAndYellow;
-            yield return new WaitForSeconds(.7f);
-            trafficLightController.currentState = State.Green;
-            yield return new WaitForSeconds(.7f);
-            trafficLightController.currentState = State.GreenAndYellow;
-            yield return new WaitForSeconds(1f);
-            trafficLightController.currentState = State.Red;
-            yield return new WaitForSeconds(1);
-        }
-    }
 
     public void OnStart()
     {
         GetComponent<SmoothPlaneDistance>().HidePlane();
 
-        //StartCoroutine(ControlTrafficLight());
         programmingNodeCollector.CreateSequence();
         
         restartButton.SetActive(true);

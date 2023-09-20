@@ -52,8 +52,8 @@ public class ConnectionCreator : MonoBehaviour
             return;
         }
 
-        bool initialConnectionsBad = IsHasConnections(_initialObject, _initialObject.name is "Start" or "End" ? 0 : 2);
-        bool targetConnectionsBad = IsHasConnections(targetObject, targetObject.name is "Start" or "End" ? 0 : 2);
+        bool initialConnectionsBad = IsHasConnections(_initialObject, _initialObject.name is "Start" ? 0 : 2);
+        bool targetConnectionsBad = IsHasConnections(targetObject, targetObject.name is "Start" ? 0 : 2);
         if (initialConnectionsBad || targetConnectionsBad)
         {
             NoConnectionFound();

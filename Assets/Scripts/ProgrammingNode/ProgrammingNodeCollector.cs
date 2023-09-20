@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ public class ProgrammingNodeCollector : MonoBehaviour
 
     public bool isRunning = false;
 
-    public void CreateSequence()
+    private List<String> errors = new List<String>();
+
+    public List<String> CreateSequence()
     {
         // Get all child objects of the parent
         //GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
@@ -16,9 +19,11 @@ public class ProgrammingNodeCollector : MonoBehaviour
 
         trafficLightController.TurnOnTrafficLight(State.None);
         List<RectTransform> sortedObjects = SortConnections();
-
+        
         
         StartCoroutine(RunCode(sortedObjects));
+
+        return errors;
     }
 
     public void StopSequence()
@@ -37,7 +42,8 @@ public class ProgrammingNodeCollector : MonoBehaviour
         {
             RectTransform lastObject = sortedObjects[^1];
             List<Connection> newConnections = ConnectionManager.FindConnections(lastObject);
-
+            
+            print("connections: " + newConnections.Count);
             foreach (Connection newConnection in newConnections)
             {
                 RectTransform foundObject = getPaar(lastObject.name, newConnection.target);
