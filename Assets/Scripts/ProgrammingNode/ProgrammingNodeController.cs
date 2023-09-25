@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProgrammingNodeModel
 {
-    public State state = State.None;
+    public State state = State.Green;
     public int length = 1;
 
     public int id = -1;
@@ -30,7 +30,6 @@ public class ProgrammingNodeController : MonoBehaviour
     private void OnDropdownValueChanged(int index)
     {
         string selectedOption = dropdown.options[index].text;
-        Debug.Log("Selected Option: " + selectedOption);
 
         switch (selectedOption)
         {

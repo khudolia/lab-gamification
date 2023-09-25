@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class BlockSequenceController : MonoBehaviour
 {
-    public TrafficLightController trafficLightController;
     public ProgrammingNodeCollector programmingNodeCollector;
-
+    
+    public ErrorController errorController;
+    
     public GameObject startButton;
     public GameObject restartButton;
+    public GameObject deleteButton;
 
     public bool isRunning = false;
     private void Start()
     {
         startButton.SetActive(true);
         restartButton.SetActive(false);
+        deleteButton.SetActive(true);
+        errorController.Disable();
     }
 
     private void Update()
@@ -31,12 +35,23 @@ public class BlockSequenceController : MonoBehaviour
 
     public void OnStart()
     {
-        GetComponent<SmoothPlaneDistance>().HidePlane();
 
-        programmingNodeCollector.CreateSequence();
-        
-        restartButton.SetActive(true);
-        startButton.SetActive(false);
+        var errors = programmingNodeCollector.CreateSequence();
+
+        if (errors.Count > 0)
+        {
+            errorController.Enable();
+            errorController.ShowErrors(errors);
+        }
+        if (errors.Count == 0)
+        {
+            GetComponent<SmoothPlaneDistance>().HidePlane();
+
+            restartButton.SetActive(true);
+            startButton.SetActive(false);
+            deleteButton.SetActive(false);
+            errorController.Disable();
+        }
     }
 
     public void OnRestart()
@@ -49,5 +64,6 @@ public class BlockSequenceController : MonoBehaviour
         
         restartButton.SetActive(false);
         startButton.SetActive(true);
+        deleteButton.SetActive(true);
     }
 }

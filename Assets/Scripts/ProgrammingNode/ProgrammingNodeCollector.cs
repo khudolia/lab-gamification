@@ -13,14 +13,21 @@ public class ProgrammingNodeCollector : MonoBehaviour
 
     public List<String> CreateSequence()
     {
+        errors.Clear();
+
         // Get all child objects of the parent
         //GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
         isRunning = true;
 
         trafficLightController.TurnOnTrafficLight(State.None);
         List<RectTransform> sortedObjects = SortConnections();
-        
-        
+
+        if (sortedObjects.Count == 0)
+            errors.Add("No connections");
+
+        if (errors.Count > 0)
+            return errors;
+
         StartCoroutine(RunCode(sortedObjects));
 
         return errors;
@@ -36,20 +43,28 @@ public class ProgrammingNodeCollector : MonoBehaviour
         List<Connection> connections = ConnectionManager.GetConnections();
         List<RectTransform> sortedObjects = new List<RectTransform>();
 
-        sortedObjects.Add(GameObject.Find("Start").GetComponent<RectTransform>());
+        sortedObjects.Add(GameObject.Find("StartNode").GetComponent<RectTransform>());
 
         foreach (Connection connection in connections)
         {
             RectTransform lastObject = sortedObjects[^1];
             List<Connection> newConnections = ConnectionManager.FindConnections(lastObject);
-            
-            print("connections: " + newConnections.Count);
+
+            if (sortedObjects.Count == 1 && newConnections.Count == 0)
+                errors.Add("No nodes found");
+            if (sortedObjects.Count == 2 && newConnections.Count == 1)
+                errors.Add("There should be more than 1 Node");
+
             foreach (Connection newConnection in newConnections)
             {
-                RectTransform foundObject = getPaar(lastObject.name, newConnection.target);
+                if (newConnection.target[0] == lastObject)
+                {
+                    RectTransform foundObject = newConnection.target[1];
 
-                if (!CheckIfObjectIsInside(sortedObjects, foundObject.name))
-                    sortedObjects.Add(foundObject);
+                    // if (!CheckIfObjectIsInside(sortedObjects, foundObject.name))
+                    if (sortedObjects.Count < 1000)
+                        sortedObjects.Add(foundObject);
+                }
             }
         }
 
@@ -80,17 +95,18 @@ public class ProgrammingNodeCollector : MonoBehaviour
     {
         // while (isRunning)
         // {
-            // Iterate through each child transform
-            foreach (RectTransform node in nodes)
+        // Iterate through each child transform
+        foreach (RectTransform node in nodes)
+        {
+            // Check if the child object has a ProgrammingNodeController component
+            ProgrammingNodeController nodeController = node.GetComponent<ProgrammingNodeController>();
+            if (nodeController != null)
             {
-                // Check if the child object has a ProgrammingNodeController component
-                ProgrammingNodeController nodeController = node.GetComponent<ProgrammingNodeController>();
-                if (nodeController != null)
-                {
-                    trafficLightController.currentState = nodeController.model.state;
-                    yield return new WaitForSeconds(nodeController.model.length);
-                }
+                trafficLightController.currentState = nodeController.model.state;
+                print(nodeController.model.state);
+                yield return new WaitForSeconds(nodeController.model.length);
             }
+        }
         // }
     }
 
