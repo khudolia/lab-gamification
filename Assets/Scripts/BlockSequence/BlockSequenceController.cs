@@ -21,18 +21,7 @@ public class BlockSequenceController : MonoBehaviour
         deleteButton.SetActive(true);
         errorController.Disable();
     }
-
-    private void Update()
-    {
-        List<Connection> connections = ConnectionManager.FindConnections(GetComponent<RectTransform>());
-
-        if (connections == null) return;
-        
-        foreach (var connection in connections)
-        {
-        }
-    }
-
+    
     public void OnStart()
     {
 

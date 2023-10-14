@@ -76,9 +76,8 @@ public class ConnectionCreator : MonoBehaviour
 
         var connection1 = connection.points[0];
         var connection2 = connection.points[1];
-        connection1.direction = ObjectDirectionCalculation.CalculatePosition(secondPoint, firstPoint);
-        connection2.direction = ObjectDirectionCalculation.CalculatePosition(firstPoint, secondPoint);
-
+        LineDirectionUpdater.UpdateConnection(connection1, connection2, firstPoint, secondPoint);
+        
         connection1.weight = .1f;
         connection2.weight = .1f;
     }
