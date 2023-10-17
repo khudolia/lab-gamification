@@ -69,19 +69,6 @@ public class ConnectionSelecter : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && isSelected)
                 connectionDestroyer.ClearSelection();
         }
-
-        if (isSelected)
-        {
-            if (Input.GetKeyDown(KeyCode.Delete))
-                DestroyObject();
-
-            // Special case for Apple laptops, where there is no "DEL" button
-            if (Input.GetKey(KeyCode.LeftCommand) && Input.GetKey(KeyCode.Backspace))
-                DestroyObject();
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-                connectionDestroyer.ClearSelection();
-        }
     }
 
     private void DestroyObject()

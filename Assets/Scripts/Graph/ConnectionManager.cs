@@ -82,6 +82,20 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+
+	public static void RemoveConnections(List<Connection> cl)
+	{
+		for (var i = 0; i < cl.Count; i++)
+		{
+			//don't use the property here. We don't want to create an instance when the scene loads
+			if (cl[i] != null && _instance != null)
+			{
+				_instance.connections.Remove(cl[i]);
+				Destroy(cl[i].gameObject);
+			}
+		}
+	}
+
 	public static void SortConnections() {
 		if (!instance) return;
 

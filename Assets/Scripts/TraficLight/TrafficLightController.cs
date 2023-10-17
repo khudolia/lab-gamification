@@ -104,6 +104,12 @@ public class TrafficLightController : MonoBehaviour
                 ChangeLight(redLight, _targetNoneColor, _redCoroutine);
                 ChangeLight(yellowLight, _targetNoneColor, _yellowCoroutine);
                 break;
+            case State.GreenAndYellow:
+                ChangeLight(redLight, _targetNoneColor, _redCoroutine);
+                break;
+            case State.RedAndYellow:
+                ChangeLight(greenLight, _targetNoneColor, _greenCoroutine);
+                break;
             case State.None:
                 ChangeLight(redLight, _targetNoneColor, _redCoroutine);
                 ChangeLight(yellowLight, _targetNoneColor, _yellowCoroutine);

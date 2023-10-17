@@ -6,13 +6,9 @@ using UnityEngine.EventSystems;
 public class CursorTargetController : MonoBehaviour
 {
     private RectTransform uiObjectRectTransform;
-    private ConnectionCreator _connectionCreator;
     
     private void Start()
     {
-        var connection = GameObject.Find("ConnectionManager");
-        _connectionCreator = connection.GetComponent<ConnectionCreator>();
-        
         uiObjectRectTransform = GetComponent<RectTransform>();
         
         gameObject.SetActive(false);

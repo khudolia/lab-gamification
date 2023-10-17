@@ -47,4 +47,9 @@ public class NewItemController : MonoBehaviour
         currentObject = Instantiate(prefab, transform.position, transform.rotation, transform.parent);
         countOfSpawnedObjects++;
     }
+
+    public void ObjectRemoved()
+    {
+        countOfSpawnedObjects--;
+    }
 }

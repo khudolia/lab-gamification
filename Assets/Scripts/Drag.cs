@@ -56,6 +56,10 @@ public class Drag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUp
     {
         // Perform any necessary cleanup or additional logic when the dragging ends
 
+        if (isDragging == false && CompareTag("Node") && eventData.button != PointerEventData.InputButton.Right)
+        {
+            GetComponent<NodeDeletor>().OnPress();
+        }
         isDragging = false;
     }
 
