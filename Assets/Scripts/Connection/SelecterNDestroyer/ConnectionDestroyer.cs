@@ -32,7 +32,7 @@ public class ConnectionDestroyer : MonoBehaviour
 
     public void ClearSelectionFromUI()
     {
-        if (selectedObject.CompareTag("Node"))
+        if (selectedObject != null && selectedObject.CompareTag("Node"))
         {
             previousSelectedObject = selectedObject;
             selectedObject = null;

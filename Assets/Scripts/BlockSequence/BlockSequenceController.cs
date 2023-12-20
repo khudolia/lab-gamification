@@ -22,25 +22,35 @@ public class BlockSequenceController : MonoBehaviour
         errorController.Disable();
     }
     
-    public void OnStart()
+    public bool OnStart()
     {
-
         var errors = programmingNodeCollector.CreateSequence();
 
         if (errors.Count > 0)
         {
             errorController.Enable();
             errorController.ShowErrors(errors);
+
+            return false;
         }
         if (errors.Count == 0)
         {
-            GetComponent<SmoothPlaneDistance>().HidePlane();
+            //GetComponent<SmoothPlaneDistance>().HidePlane();
 
             restartButton.SetActive(true);
             startButton.SetActive(false);
             deleteButton.SetActive(false);
             errorController.Disable();
+            
+            return true;
         }
+
+        return true;
+    }
+
+    public void RunCode()
+    {
+        programmingNodeCollector.RunCode();
     }
 
     public void OnRestart()

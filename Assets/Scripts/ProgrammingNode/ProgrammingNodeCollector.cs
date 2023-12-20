@@ -11,6 +11,7 @@ public class ProgrammingNodeCollector : MonoBehaviour
     private List<String> errors = new();
 
     private Coroutine runningCode;
+    private List<RectTransform> sortedObjects = new List<RectTransform>();
 
     private void Start()
     {
@@ -20,26 +21,32 @@ public class ProgrammingNodeCollector : MonoBehaviour
     public List<String> CreateSequence()
     {
         errors.Clear();
+        sortedObjects.Clear();
 
         // Get all child objects of the parent
         //GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
 
         trafficLightController.TurnOnTrafficLight(State.None);
-        List<RectTransform> sortedObjects = SortConnections();
+        sortedObjects = SortConnections();
 
         if (sortedObjects.Count == 0)
             errors.Add("No connections");
 
         if (errors.Count > 0)
             return errors;
-
-        runningCode = StartCoroutine(RunCode(sortedObjects));
-
+        
         return errors;
+    }
+    
+    public void RunCode()
+    { 
+        runningCode = StartCoroutine(RunCode(sortedObjects));
     }
 
     public void StopSequence()
     {
+        if (runningCode == null) return;
+        
         StopCoroutine(runningCode);
         trafficLightController.currentState = State.None;
     }

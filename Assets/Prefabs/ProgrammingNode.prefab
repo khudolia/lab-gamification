@@ -1738,8 +1738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInside: 0
-  maxRotationAngle: 5
   rotationSpeed: 5
+  rotationStrength: 0.1
 --- !u!1 &4710377331641504506
 GameObject:
   m_ObjectHideFlags: 0
