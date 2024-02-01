@@ -11,18 +11,11 @@ public class MenuController : MonoBehaviour
     private bool _creditsPanelState = false;
     private bool _levelsPanelPanelState = false;
     
-    // Start is called before the first frame update
     void Start()
     {
         creditsPanel.SetActive(_creditsPanelState);
         levelsPanel.SetActive(_levelsPanelPanelState);
         mainPanel.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ChangeCreditsState()
@@ -41,6 +34,4 @@ public class MenuController : MonoBehaviour
         mainPanel.SetActive(!_levelsPanelPanelState);
 
     }
-    
-    
 }

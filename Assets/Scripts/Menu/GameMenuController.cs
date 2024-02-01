@@ -8,7 +8,6 @@ public class GameMenuController : MonoBehaviour
 
     private bool _pausePanelState = false;
     
-    // Start is called before the first frame update
     void Start()
     {
         pausePanel.SetActive(_pausePanelState);

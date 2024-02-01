@@ -55,9 +55,7 @@ public class BlockSequenceController : MonoBehaviour
 
     public void OnRestart()
     {
-        GetComponent<SmoothPlaneDistance>().ShowPlane();
-
-      //  StopCoroutine(ControlTrafficLight());
+        //  StopCoroutine(ControlTrafficLight());
         programmingNodeCollector.StopSequence();
 
         

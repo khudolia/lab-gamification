@@ -86,27 +86,7 @@ public class ProgrammingNodeCollector : MonoBehaviour
             }
         }
 
-        // for (var i = 0; i < sortedObjects.Count; i++)
-        // {
-        //     print(i + " " + sortedObjects[i].name);
-        // }
-
         return sortedObjects;
-    }
-
-    private RectTransform getPaar(string targetName, RectTransform[] objects)
-    {
-        foreach (RectTransform o in objects)
-        {
-            if (o.name == targetName)
-            {
-                continue;
-            }
-
-            return o.GetComponent<RectTransform>();
-        }
-
-        return null;
     }
 
     IEnumerator RunCode(List<RectTransform> nodes)
@@ -145,20 +125,7 @@ public class ProgrammingNodeCollector : MonoBehaviour
             }
         }
 
-        /// 
+        //// 
 
-    }
-
-    private bool CheckIfObjectIsInside(List<RectTransform> array, string objectName)
-    {
-        foreach (RectTransform rectTransform in array)
-        {
-            if (rectTransform.name == objectName)
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
